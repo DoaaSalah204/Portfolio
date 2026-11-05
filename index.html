@@ -5,21 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Doaa Salah | Portfolio</title>
     <meta name="description" content="Doaa Salah, Computer and Systems Engineering graduate. I build React websites, from customer pages to admin dashboards." />
-    <meta name="theme-color" content="#F5F6F9" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0B101A" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0A0612" />
     <meta property="og:title" content="Doaa Salah | Portfolio" />
     <meta property="og:description" content="React websites, from customer pages to admin dashboards." />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" />
     <script>
       // Apply the saved theme before first paint to avoid a flash.
       try {
         var t = localStorage.getItem('doaa-theme');
         if (t) document.documentElement.setAttribute('data-theme', t);
       } catch (e) {}
+      // Motion is on by default. Visitors can switch it off with the button in the header.
+      try {
+        document.documentElement.setAttribute('data-motion', localStorage.getItem('doaa-motion') === 'off' ? 'off' : 'on');
+      } catch (e) { document.documentElement.setAttribute('data-motion', 'on'); }
     </script>
   </head>
   <body>
