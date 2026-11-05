@@ -1,6 +1,11 @@
 import { profile } from '../data.js'
 import { useLang } from '../i18n.jsx'
 
+// On a computer without a mail app, mailto: does nothing, so open Gmail's compose window instead. Phones keep mailto:.
+const phone = () => typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
+const mailHref = (to) => (phone() ? `mailto:${to}` : `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}`)
+const mailExt = () => (phone() ? {} : { target: '_blank', rel: 'noopener noreferrer' })
+
 const short = (u) => u.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
 
 const icons = {
@@ -31,13 +36,13 @@ export default function Contact() {
           <span className="mono">{t('contactEyebrow')}</span>
           <h2>{t('contactH')}</h2>
           <p>{t('contactSub')}</p>
-          <a className="btn p" href={`mailto:${profile.email}`}>
+          <a className="btn p" href={mailHref(profile.email)} {...mailExt()}>
             {t('emailMe')}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
           </a>
         </div>
         <div className="cright">
-          <Card icon="mail" label="Email" text={profile.email} href={`mailto:${profile.email}`} />
+          <Card icon="mail" label="Email" text={profile.email} href={mailHref(profile.email)} external={!phone()} />
           <Card icon="linkedin" label="LinkedIn" text={short(profile.linkedin)} href={profile.linkedin} external />
           {profile.github && <Card icon="github" label="GitHub" text={short(profile.github)} href={profile.github} external />}
           {profile.cv && <Card icon="cv" label={t('cvLabel')} text={t('cv')} href={profile.cv} external />}
@@ -49,13 +54,13 @@ export default function Contact() {
 
 export function Footer() {
   const { t } = useLang()
-  const soc = [['mail', 'Email', `mailto:${profile.email}`], ['linkedin', 'LinkedIn', profile.linkedin], ['github', 'GitHub', profile.github]].filter((x) => x[2])
+  const soc = [['mail', 'Email', mailHref(profile.email)], ['linkedin', 'LinkedIn', profile.linkedin], ['github', 'GitHub', profile.github]].filter((x) => x[2])
   return (
     <footer className="foot">
       <div className="wrap">
         <div className="soc">
           {soc.map(([k, l, h]) => (
-            <a key={k} href={h} aria-label={l} {...(k === 'mail' ? {} : { target: '_blank', rel: 'noopener noreferrer' })}>
+            <a key={k} href={h} aria-label={l} {...(k === 'mail' ? mailExt() : { target: '_blank', rel: 'noopener noreferrer' })}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{icons[k]}</svg>
             </a>
           ))}
