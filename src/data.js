@@ -36,7 +36,7 @@ export const projects = [
   },
   {
     key: 'carely', name: 'Carely', type: 'Healthcare · Appointment booking',
-    pb: '#DCEBF7', pf: '#0F2747', pa: '#0B7A6D',
+    pb: '#DCEBF7', pf: '#0F2747', pa: '#34D3B8',
     desc: 'Healthcare booking platform. Patients pick a real available slot and book, and admins run the whole system.',
     facts: ['Doctors, clinics and specialties','Book, reschedule or cancel','No double-booking of a slot','Reviews, favorites and medical history','Admin dashboard with stats and reports','English and Arabic (RTL), light and dark'],
     tags: 'React · Node.js · SQLite',
@@ -105,3 +105,50 @@ projects.find((p) => p.key === 'wanderly').shots = wanderlyShots
 projects.find((p) => p.key === 'volt').shots = voltShots
 projects.find((p) => p.key === 'edulearn').shots = edulearnShots
 projects.find((p) => p.key === 'carely').shots = carelyShots
+
+// Certificates. A section appears only when this list has items.
+// Each item: { name, issuer, year, link } where text can be a string or { en: '...', ar: '...' }. `link` is optional.
+export const certificates = [
+  {
+    name: 'Front-End Web Development using Vue.js',
+    issuer: { en: 'Information Technology Institute (ITI)', ar: 'معهد تكنولوجيا المعلومات (ITI)' },
+    year: { en: 'Jul–Aug 2026', ar: 'يوليو–أغسطس 2026' },
+    detail: { en: '132 hours · attendance certificate', ar: '132 ساعة · شهادة حضور' },
+    link: '/certificates/iti-vuejs.jpg', thumb: '/certificates/iti-vuejs-thumb.jpg',
+  },
+]
+
+// Client reviews. A section appears only when this list has items.
+// Each item: { quote, author, role } where text can be a string or { en: '...', ar: '...' }.
+export const reviews = []
+
+// Courses taken in the field. A section appears only when this list has items.
+// Each item: { name, provider, year, link } where text can be a string or { en: '...', ar: '...' }. `link` is optional.
+const iti = { en: 'ITI Platform (Mahara-Tech)', ar: 'منصة ITI (مهارة تك)' }
+const oct = { en: 'Oct 2026', ar: 'أكتوبر 2026' }
+const done = (en, ar) => ({ en: `${en} · certificate of completion`, ar: `${ar} · شهادة إتمام` })
+export const courses = [
+  { name: { en: 'HTML and CSS', ar: 'HTML وCSS' } },
+  { name: { en: 'JavaScript', ar: 'JavaScript' } },
+  { name: { en: 'React', ar: 'React' } },
+  { name: { en: 'Databases', ar: 'قواعد البيانات' } },
+  { name: { en: 'Python', ar: 'Python' } },
+  { name: { en: 'Java', ar: 'Java' } },
+  { name: { en: 'C++', ar: 'C++' } },
+  { name: { en: 'Freelancing Basics', ar: 'أساسيات العمل الحر' }, issuer: iti, year: oct, detail: done('3 hours 8 min', '3 ساعات و8 دقائق'), link: '/certificates/freelancing-basics.pdf', thumb: '/certificates/freelancing-basics-thumb.jpg' },
+  { name: { en: 'Getting started as a freelancer (Upwork)', ar: 'البدء كمستقل (Upwork)' }, issuer: iti, year: oct, detail: done('50 min', '50 دقيقة'), link: '/certificates/freelancer-upwork.pdf', thumb: '/certificates/freelancer-upwork-thumb.jpg' },
+  { name: { en: 'Getting started as a freelancer (Khamsat)', ar: 'البدء كمستقل (خمسات)' }, issuer: iti, year: oct, detail: done('1 hour', 'ساعة'), link: '/certificates/freelancer-khamsat.pdf', thumb: '/certificates/freelancer-khamsat-thumb.jpg' },
+  { name: { en: 'Getting started as a freelancer (Mostaql)', ar: 'البدء كمستقل (مستقل)' }, issuer: iti, year: oct, detail: done('33 min', '33 دقيقة'), link: '/certificates/freelancer-mostaql.pdf', thumb: '/certificates/freelancer-mostaql-thumb.jpg' },
+  { name: { en: 'Find Your Freelance Fit', ar: 'اعثري على مجالك في العمل الحر' }, issuer: iti, year: oct, detail: done('15 min', '15 دقيقة'), link: '/certificates/freelance-fit.pdf', thumb: '/certificates/freelance-fit-thumb.jpg' },
+]
+
+// Experience timeline. Each item: { role, org, period, place, bullets: [ ... ] } with text as a string or { en, ar }.
+export const experience = [
+  {
+    role: { en: 'Programming Instructor', ar: 'مدرّسة برمجة' },
+    bullets: [
+      { en: 'Teach frontend fundamentals and explain programming concepts with clear, simple examples.', ar: 'أشرح أساسيات الـ Frontend ومفاهيم البرمجة بأمثلة واضحة وبسيطة.' },
+      { en: 'Help students build their first web projects and solve programming exercises.', ar: 'أساعد الطلاب على بناء أول مشاريع الويب وحل تمارين البرمجة.' },
+    ],
+  },
+]

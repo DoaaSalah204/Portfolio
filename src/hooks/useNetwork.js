@@ -8,9 +8,9 @@ export default function useNetwork(heroRef, canvasRef) {
     if (!hero || !c) return
     const x = c.getContext('2d')
     const root = document.documentElement
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const reduce = document.documentElement.dataset.motion === 'off'
     let W = 0, H = 0, pts = [], mx = -9999, my = -9999
-    let run = true, rgb = '39,69,232', tick = 0, raf = 0
+    let run = true, rgb = '168,85,247', tick = 0, raf = 0
 
     function size() {
       const r = hero.getBoundingClientRect()
@@ -53,7 +53,7 @@ export default function useNetwork(heroRef, canvasRef) {
         }
         const mdx = p.x - mx, mdy = p.y - my, md = mdx * mdx + mdy * mdy
         if (md < 26000) {
-          x.strokeStyle = `rgba(255,107,61,${0.6 * (1 - md / 26000)})`
+          x.strokeStyle = `rgba(244,114,182,${0.6 * (1 - md / 26000)})`
           x.lineWidth = 1.2
           x.beginPath(); x.moveTo(p.x, p.y); x.lineTo(mx, my); x.stroke()
         }

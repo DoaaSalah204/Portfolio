@@ -1,33 +1,21 @@
-import { useRef } from 'react'
-import useTilt from '../hooks/useTilt.js'
-import Mock from './Mock.jsx'
 import Slider from './Slider.jsx'
-import { projects } from '../data.js'
-
-function Stage({ k }) {
-  const ref = useRef(null)
-  useTilt(ref)
-  return (
-    <div className="pstage rv">
-      <div className="stage" ref={ref}><Mock k={k} /></div>
-    </div>
-  )
-}
+import Heading from './Heading.jsx'
+import { useContent, useLang } from '../i18n.jsx'
 
 const Arrow = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg>
 )
 
 export default function Projects() {
+  const { t } = useLang()
+  const { projects } = useContent()
   return (
-    <div id="projects">
-      {projects.map((p) => (
-        <section
-          key={p.key} className={'proj' + (p.shots ? ' wide' : '')}
-          style={{ '--pb': p.pb, '--pf': p.pf, '--pa': p.pa }}
-        >
-          <div className="wrap">
-            <div className="ptext rv">
+    <section className="sec wrap" id="work">
+      <Heading title={t('workH')} sub={t('workSub')} />
+      <div id="projects" className="plist">
+        {projects.map((p) => (
+          <article key={p.key} className="proj gc rv" style={{ '--pa': p.pa }}>
+            <div className="ptext">
               <span className="ptype">{p.type}</span>
               <h3>{p.name}</h3>
               <p>{p.desc}</p>
@@ -35,17 +23,15 @@ export default function Projects() {
               <div className="tags">{p.tags}</div>
               {(p.video || p.repo) && (
                 <div className="plinks">
-                  {p.video && <a className="lnk main" href={p.video} target="_blank" rel="noopener noreferrer">Watch the demo <Arrow /></a>}
+                  {p.video && <a className="lnk main" href={p.video} target="_blank" rel="noopener noreferrer">{t('watch')} <Arrow /></a>}
                   {p.repo && <a className="lnk" href={p.repo} target="_blank" rel="noopener noreferrer">View the code <Arrow /></a>}
                 </div>
               )}
             </div>
-            {p.shots
-              ? <div className="rv"><Slider shots={p.shots} title={p.shotsTitle || p.name} label={p.name} /></div>
-              : <Stage k={p.mock} />}
-          </div>
-        </section>
-      ))}
-    </div>
+            {p.shots && <Slider shots={p.shots} title={p.shotsTitle || p.name} label={p.name} />}
+          </article>
+        ))}
+      </div>
+    </section>
   )
 }

@@ -1,12 +1,17 @@
-import { marqueeWords } from '../data.js'
+import { useContent } from '../i18n.jsx'
 
 export default function Marquee() {
-  const row = marqueeWords.map((w) => <span key={w}>{w}</span>)
+  const { marquee } = useContent()
+  const back = [...marquee].reverse()
   return (
     <div className="marq" aria-hidden="true">
       <div className="track">
-        {row}
-        {marqueeWords.map((w) => <span key={w + '2'}>{w}</span>)}
+        {marquee.map((w) => <span key={w}>{w}</span>)}
+        {marquee.map((w) => <span key={w + '2'}>{w}</span>)}
+      </div>
+      <div className="track back out">
+        {back.map((w) => <span key={w}>{w}</span>)}
+        {back.map((w) => <span key={w + '2'}>{w}</span>)}
       </div>
     </div>
   )
